@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".ui.send_fund.SendFundFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".96" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/send_fund_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_25"
+            android:text="@string/IDS_SEND_FUND"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_24"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/send_fund_title_text"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@id/send_fund_title_text"
+            app:srcCompat="@drawable/ic_arrow_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/recipient_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:text="@string/IDS_RECIPIENT"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/send_fund_title_text" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/user_info_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8"
+            android:background="@drawable/ic_recipient_bg"
+            android:elevation="@dimen/dimen_3"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/recipient_title_text">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/user_imageView"
+                android:layout_width="@dimen/dimen_36"
+                android:layout_height="@dimen/dimen_36"
+                android:layout_marginVertical="@dimen/dimen_8"
+                android:layout_marginStart="@dimen/dimen_12"
+                app:shapeAppearanceOverlay="@style/shapeAppearanceOverlay.Circle"
+                app:srcCompat="@color/dark_gray" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_name_textView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_12"
+                android:contentDescription="@string/IDS_USER_NAME_OR_WALLET_ADDRESS"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_16" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/balance_layout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_120"
+            android:layout_marginTop="@dimen/dimen_15"
+            android:background="@drawable/ic_balance_bg"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/user_info_layout">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/insufficient_balance_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:text="@string/IDS_INSUFFICIENT_BALANCE"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/balance_layout" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_fund_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_28"
+            android:layout_marginEnd="@dimen/dimen_16"
+            android:text="@string/IDS_ADD_FUND"
+            android:textSize="@dimen/text_size_14"
+            android:textAllCaps="false"
+            android:background="@drawable/ic_add_fund_bg"
+            android:textColor="@color/button_active"
+            app:layout_constraintBottom_toBottomOf="@id/insufficient_balance_textView"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintTop_toTopOf="@id/insufficient_balance_textView" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/continue_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_56"
+            android:layout_marginTop="@dimen/dimen_45"
+            android:background="@drawable/ic_button_inactive_bg"
+            android:text="@string/IDS_CONTINUE"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_18"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/insufficient_balance_textView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

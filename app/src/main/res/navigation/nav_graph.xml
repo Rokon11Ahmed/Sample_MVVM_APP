@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login_fragment">
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.example.wind.ui.login.LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_fragment_to_send_fund_fragment"
+            app:destination="@id/send_fund_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/send_fund_fragment"
+        android:name="com.example.wind.ui.send_fund.SendFundFragment"
+        tools:layout="@layout/fragment_send_fund" />
+
+</navigation>

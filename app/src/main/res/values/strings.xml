@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Wind</string>
+    <string name="IDS_SEND_FUND">Send Fund</string>
+    <string name="IDS_USER_NAME_OR_WALLET_ADDRESS"> username or wallet address</string>
+    <string name="IDS_USER_NAME">User name</string>
+    <string name="IDS_USER_NAME_TITLE">User name title</string>
+    <string name="IDS_ENTER_YOUR_PIN">Enter your PIN</string>
+    <string name="IDS_CONTINUE">Continue</string>
+    <string name="IDS_RECIPIENT">Recipient</string>
+    <string name="IDS_OTP">One time password</string>
+    <string name="IDS_INSUFFICIENT_BALANCE">Insufficient balance</string>
+    <string name="IDS_ADD_FUND">Add fund</string>
+</resources>
