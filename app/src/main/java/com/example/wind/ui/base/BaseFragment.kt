@@ -86,11 +86,18 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
 
     protected fun finishCurrent() {
         activity.get()?.apply {
-            if (onBackPressedDispatcher.hasEnabledCallbacks()){
+            if (onBackPressedDispatcher.hasEnabledCallbacks()) {
                 onBackPressedDispatcher.onBackPressed()
-            }else{
+            } else {
                 onBackPressed()
             }
         }
+    }
+
+    fun isUserNameValid(name: String): Boolean {
+        if (name.length>33 || name.length<3){
+            return false
+        }
+        return true
     }
 }
