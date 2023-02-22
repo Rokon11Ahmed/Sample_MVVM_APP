@@ -10,4 +10,9 @@
     <string name="IDS_OTP">One time password</string>
     <string name="IDS_INSUFFICIENT_BALANCE">Insufficient balance</string>
     <string name="IDS_ADD_FUND">Add fund</string>
+    <string name="IDS_AMOUNT_HINT">0.00</string>
+    <string name="IDS_MAX">MAX</string>
+    <string name="IDS_USDC">USDC</string>
+    <string name="IDS_BALANCE">Balance</string>
+    <string name="IDS_BACK_BUTTON">Back Button</string>
 </resources>

@@ -40,6 +40,9 @@
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="@id/send_fund_title_text"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toTopOf="@id/send_fund_title_text"
@@ -102,6 +105,57 @@
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/user_info_layout">
 
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/amount_editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_22"
+                android:layout_marginTop="@dimen/dimen_22"
+                android:background="@drawable/ic_enter_amount_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:hint="@string/IDS_AMOUNT_HINT"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_48"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/max_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/max_button"
+                android:layout_width="@dimen/dimen_60"
+                android:layout_height="@dimen/dimen_36"
+                android:layout_marginEnd="@dimen/dimen_22"
+                android:background="@drawable/ic_add_fund_bg"
+                android:text="@string/IDS_MAX"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/amount_editText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/amount_editText" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/amount_currency_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/IDS_USDC"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintStart_toStartOf="@+id/amount_editText"
+                app:layout_constraintTop_toBottomOf="@+id/amount_editText" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/max_balance_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/IDS_USDC"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toBottomOf="@id/amount_currency_textView"
+                app:layout_constraintEnd_toEndOf="@id/max_button"
+                app:layout_constraintTop_toTopOf="@id/amount_currency_textView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
