@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -37,8 +39,10 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -55,4 +59,17 @@ dependencies {
 
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.1.2'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+    //Dagger - Hilt
+    implementation "com.google.dagger:hilt-android:2.44.2"
+    kapt "com.google.dagger:hilt-android-compiler:2.44.2"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
