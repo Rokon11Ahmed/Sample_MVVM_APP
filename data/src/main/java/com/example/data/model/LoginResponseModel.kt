@@ -26,6 +26,6 @@ data class UserInfo(
 )
 
 data class AccountInfo(
-    val balance: Int,
+    val balance: Double,
     val currency: String
 )
