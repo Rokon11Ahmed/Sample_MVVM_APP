@@ -1,17 +1,20 @@
 package com.example.wind.ui.login
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.example.domain.model.UserInfo
 import com.example.wind.R
 import com.example.wind.databinding.FragmentLoginBinding
 import com.example.wind.ui.base.BaseFragment
+import com.example.wind.utils.IntentKey
 import com.mukesh.OnOtpCompletionListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -20,6 +23,7 @@ import kotlinx.coroutines.launch
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate), OnOtpCompletionListener, TextWatcher {
 
     private val viewModel: LoginViewModel by viewModels()
+    var userPin = ""
 
     override fun setUpViews() {
         super.setUpViews()
@@ -46,8 +50,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             when (it.id) {
                 R.id.continue_button -> {
                     hideKeyboard()
-                    //findNavController().navigate(R.id.action_login_fragment_to_send_fund_fragment)
-                    viewModel.login("nadimh", "1234")
+                    val userName = binding.userNameEditText.text?.trim().toString()
+                    if (isUserNameValid(userName)){
+                        viewModel.login(userName, userPin)
+                    }
                 }
             }
         }
@@ -59,11 +65,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 viewModel.state.collect {
                     isShowProgressBar(it.isLoading)
 
-                    it.error.let {
-
+                    it.error.apply {
+                        showShortToast(this)
                     }
                     it.data?.let {
-
+                        val userData = it as UserInfo
+                        val bundle = Bundle()
+                        bundle.putString(IntentKey.KEY_USER_ID, userData.id)
+                        bundle.putString(IntentKey.KEY_USER_NAME, userData.userName)
+                        bundle.putString(IntentKey.KEY_USER_WALLET, userData.walletAddress)
+                        bundle.putString(IntentKey.KEY_USER_EMAIL, userData.email)
+                        bundle.putString(IntentKey.KEY_USER_IMAGE_URL, userData.profileImageUrl)
+                        bundle.putString(IntentKey.KEY_BALANCE, userData.balance.toString())
+                        bundle.putString(IntentKey.KEY_CURRENCY, userData.currency)
+                        findNavController().navigate( R.id.action_login_fragment_to_send_fund_fragment, bundle)
                     }
                 }
             }
@@ -71,10 +86,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun isShowProgressBar(isShow: Boolean){
-
+        binding.progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     override fun onOtpCompleted(otp: String?) {
+        otp?.let { userPin = it }
         hideKeyboard()
         isContinueButtonEnable(isEnable = true)
     }

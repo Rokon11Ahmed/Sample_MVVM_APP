@@ -8,6 +8,7 @@ fun LoginResponseModel.toUserInfo(): UserInfo {
         data?.userInfo?.Id.toString(),
         data?.userInfo?.email,
         data?.userInfo?.userName,
+        data?.userInfo?.walletAddress,
         data?.userInfo?.profileImage,
         data?.accountInfo?.balance?.toDouble(),
         data?.accountInfo?.currency

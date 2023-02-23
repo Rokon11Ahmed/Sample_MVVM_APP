@@ -76,8 +76,7 @@
                 android:layout_height="@dimen/dimen_36"
                 android:layout_marginVertical="@dimen/dimen_8"
                 android:layout_marginStart="@dimen/dimen_12"
-                app:shapeAppearanceOverlay="@style/shapeAppearanceOverlay.Circle"
-                app:srcCompat="@color/dark_gray" />
+                app:shapeAppearanceOverlay="@style/shapeAppearanceOverlay.Circle" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/user_name_textView"
@@ -112,12 +111,11 @@
                 android:layout_marginHorizontal="@dimen/dimen_22"
                 android:layout_marginTop="@dimen/dimen_22"
                 android:background="@drawable/ic_enter_amount_bg"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
+                android:maxLines="1"
+                android:inputType="number"
                 android:hint="@string/IDS_AMOUNT_HINT"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_48"
+                android:textSize="@dimen/text_size_40"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/max_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,8 +138,8 @@
                 android:id="@+id/amount_currency_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/IDS_USDC"
                 android:textColor="@color/gray"
+                android:layout_marginTop="@dimen/dimen_10"
                 android:textSize="@dimen/text_size_12"
                 app:layout_constraintStart_toStartOf="@+id/amount_editText"
                 app:layout_constraintTop_toBottomOf="@+id/amount_editText" />
@@ -150,7 +148,6 @@
                 android:id="@+id/max_balance_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/IDS_USDC"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/text_size_12"
                 app:layout_constraintBottom_toBottomOf="@id/amount_currency_textView"
@@ -189,14 +186,14 @@
             android:id="@+id/continue_button"
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_56"
-            android:layout_marginTop="@dimen/dimen_45"
-            android:background="@drawable/ic_button_inactive_bg"
+            android:layout_marginTop="@dimen/dimen_90"
+            android:background="@drawable/ic_button_active_bg"
             android:text="@string/IDS_CONTINUE"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_18"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/insufficient_balance_textView" />
+            app:layout_constraintTop_toBottomOf="@id/balance_layout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

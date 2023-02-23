@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.wind.MainActivity
@@ -90,6 +91,14 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
                 onBackPressedDispatcher.onBackPressed()
             } else {
                 onBackPressed()
+            }
+        }
+    }
+
+    fun showShortToast(message: String?){
+        activity.let {
+            message?.let { mgs ->
+                Toast.makeText(it.get()?.applicationContext, mgs, Toast.LENGTH_SHORT).show()
             }
         }
     }

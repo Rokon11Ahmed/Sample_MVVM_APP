@@ -20,7 +20,7 @@ class LoginViewModel @Inject constructor(
     private val getLoginUseCase: GetLoginUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(ApiState(isLoading = true))
+    private val _state = MutableStateFlow(ApiState(isLoading = false))
     val state = _state.asStateFlow()
 
     fun login (name: String, pin: String){
