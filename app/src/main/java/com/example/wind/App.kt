@@ -1,4 +1,4 @@
-package com.example.wind.ui.app
+package com.example.wind
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
