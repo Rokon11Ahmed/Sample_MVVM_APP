@@ -97,8 +97,8 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
 
     fun showShortToast(message: String?){
         activity.let {
-            message?.let { mgs ->
-                Toast.makeText(it.get()?.applicationContext, mgs, Toast.LENGTH_SHORT).show()
+            if (!message.isNullOrEmpty()){
+                Toast.makeText(it.get()?.applicationContext, message, Toast.LENGTH_SHORT).show()
             }
         }
     }
