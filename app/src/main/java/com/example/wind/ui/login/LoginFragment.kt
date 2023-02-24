@@ -2,7 +2,10 @@ package com.example.wind.ui.login
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
+import android.text.Spanned
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -15,6 +18,8 @@ import com.example.wind.R
 import com.example.wind.databinding.FragmentLoginBinding
 import com.example.wind.ui.base.BaseFragment
 import com.example.wind.utils.IntentKey
+import com.example.wind.utils.hideKeyboard
+import com.example.wind.utils.showShortToast
 import com.mukesh.OnOtpCompletionListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,6 +29,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private val viewModel: LoginViewModel by viewModels()
     var userPin = ""
+    override val isDataLoadDisable: Boolean
+        get() = true
 
     override fun setUpViews() {
         super.setUpViews()
@@ -49,7 +56,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         view?.let {
             when (it.id) {
                 R.id.continue_button -> {
-                    hideKeyboard()
+                    getActivity()?.hideKeyboard()
                     val userName = binding.userNameEditText.text?.trim().toString()
                     if (isUserNameValid(userName)){
                         viewModel.login(userName, userPin)
@@ -66,7 +73,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     isShowProgressBar(it.isLoading)
 
                     it.error.apply {
-                        showShortToast(this)
+                        getActivity()?.showShortToast(this)
                     }
                     it.data?.let {
                         val userData = it as UserInfo
@@ -79,9 +86,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                             bundle.putString(IntentKey.KEY_USER_IMAGE_URL, userData.profileImageUrl)
                             bundle.putString(IntentKey.KEY_BALANCE, userData.balance.toString())
                             bundle.putString(IntentKey.KEY_CURRENCY, userData.currency)
+                            Log.d("TAG", "startObserver: LoginFragment")
                             findNavController().navigate( R.id.action_login_fragment_to_send_fund_fragment, bundle)
                         }else{
-                            showShortToast(userData.errorMessage)
+                            getActivity()?.showShortToast(userData.errorMessage)
                         }
                     }
                 }
@@ -95,7 +103,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     override fun onOtpCompleted(otp: String?) {
         otp?.let { userPin = it }
-        hideKeyboard()
+        getActivity()?.hideKeyboard()
         isContinueButtonEnable(isEnable = true)
     }
 
