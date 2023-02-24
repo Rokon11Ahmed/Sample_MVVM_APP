@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.example.wind.MainActivity
+import com.example.wind.ui.MainActivity
 import java.lang.ref.WeakReference
 
 abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFactory: (LayoutInflater) -> VBinding) :
