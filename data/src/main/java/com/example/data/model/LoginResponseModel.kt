@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginResponseModel(
     val status: Boolean,
-    val data: Data?
+    val data: Data? = null,
+    val messages: ArrayList<String>? = null
 )
 
 data class Data(
