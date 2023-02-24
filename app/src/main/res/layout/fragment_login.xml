@@ -62,6 +62,8 @@
             android:id="@+id/user_name_editText"
             android:layout_width="@dimen/dimen_0"
             android:layout_height="wrap_content"
+            android:digits="0123456789qwertyuiopasdfghjklmnbvcxz_."
+            android:inputType="text"
             android:layout_marginTop="@dimen/dimen_8"
             android:hint="@string/IDS_USER_NAME_OR_WALLET_ADDRESS"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"

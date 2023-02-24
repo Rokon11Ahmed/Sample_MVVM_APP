@@ -38,4 +38,9 @@ class LoginViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        _state.value = ApiState()
+    }
 }

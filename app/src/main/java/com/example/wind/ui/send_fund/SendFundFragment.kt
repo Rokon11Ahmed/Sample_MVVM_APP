@@ -2,11 +2,13 @@ package com.example.wind.ui.send_fund
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import com.example.wind.R
 import com.example.wind.databinding.FragmentSendFundBinding
 import com.example.wind.ui.base.BaseFragment
 import com.example.wind.utils.IntentKey
+import com.example.wind.utils.hideKeyboard
 import com.example.wind.utils.loadCircularImage
 
 class SendFundFragment : BaseFragment<FragmentSendFundBinding>(FragmentSendFundBinding::inflate),
@@ -24,7 +26,7 @@ class SendFundFragment : BaseFragment<FragmentSendFundBinding>(FragmentSendFundB
 
     override fun setUpViews() {
         super.setUpViews()
-
+        Log.d("TAG", "startObserver: SendFundFragment setUpViews")
         userId = arguments?.getString(IntentKey.KEY_USER_ID) as String
         userName = arguments?.getString(IntentKey.KEY_USER_NAME) as String
         userWallet = arguments?.getString(IntentKey.KEY_USER_WALLET) as String
@@ -65,8 +67,9 @@ class SendFundFragment : BaseFragment<FragmentSendFundBinding>(FragmentSendFundB
                     binding.amountEditText.setSelection(binding.amountEditText.text!!.length)
                 }
                 R.id.continue_button -> {
-                    hideKeyboard()
+                    getActivity()?.hideKeyboard()
                 }
+                else -> {}
             }
         }
     }

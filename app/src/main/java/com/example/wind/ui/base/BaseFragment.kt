@@ -69,14 +69,6 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
 
     }
 
-    open fun hideKeyboard() {
-        activity.get()?.let {
-            val imm: InputMethodManager =
-                it.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(it.currentFocus?.windowToken, 0)
-        }
-    }
-
     open fun showKeyboard() {
         activity.get()?.let {
             val imm: InputMethodManager =
@@ -95,16 +87,23 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
         }
     }
 
-    fun showShortToast(message: String?){
-        activity.let {
-            if (!message.isNullOrEmpty()){
-                Toast.makeText(it.get()?.applicationContext, message, Toast.LENGTH_SHORT).show()
+    fun isUserNameValid(name: String): Boolean {
+        var charCount = 0
+        var previousSpecialChar: Char = Char.MIN_VALUE
+        var isConsecutiveSpecialChar = false
+        name.forEach {
+            if (it == '.' || it == '_'){
+                if (it == previousSpecialChar){
+                    isConsecutiveSpecialChar = true
+                }else{
+                    previousSpecialChar = it
+                }
+            }else{
+                charCount++
+                previousSpecialChar = Char.MIN_VALUE
             }
         }
-    }
-
-    fun isUserNameValid(name: String): Boolean {
-        if (name.length>33 || name.length<3){
+        if (name.length>33 || charCount<3 || isConsecutiveSpecialChar){
             return false
         }
         return true
