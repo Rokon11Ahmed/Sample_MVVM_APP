@@ -12,6 +12,10 @@ class LoginRepositoryImpl @Inject constructor(
 ): LoginRepository{
 
     override suspend fun getLoginResponse(name: String, pin: String): UserInfo {
-        return api.getLoginResponse(loginRequest = LoginRequestModel(user = name, pin = pin)).toUserInfo()
+        try {
+            return api.getLoginResponse(loginRequest = LoginRequestModel(user = name, pin = pin)).toUserInfo()
+        }catch (e: Exception){
+            return UserInfo(errorMessage = "Something wrong happened")
+        }
     }
 }

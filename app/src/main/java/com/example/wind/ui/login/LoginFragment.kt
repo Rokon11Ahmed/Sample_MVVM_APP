@@ -70,15 +70,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     }
                     it.data?.let {
                         val userData = it as UserInfo
-                        val bundle = Bundle()
-                        bundle.putString(IntentKey.KEY_USER_ID, userData.id)
-                        bundle.putString(IntentKey.KEY_USER_NAME, userData.userName)
-                        bundle.putString(IntentKey.KEY_USER_WALLET, userData.walletAddress)
-                        bundle.putString(IntentKey.KEY_USER_EMAIL, userData.email)
-                        bundle.putString(IntentKey.KEY_USER_IMAGE_URL, userData.profileImageUrl)
-                        bundle.putString(IntentKey.KEY_BALANCE, userData.balance.toString())
-                        bundle.putString(IntentKey.KEY_CURRENCY, userData.currency)
-                        findNavController().navigate( R.id.action_login_fragment_to_send_fund_fragment, bundle)
+                        if (userData.errorMessage.isNullOrBlank()){
+                            val bundle = Bundle()
+                            bundle.putString(IntentKey.KEY_USER_ID, userData.id)
+                            bundle.putString(IntentKey.KEY_USER_NAME, userData.userName)
+                            bundle.putString(IntentKey.KEY_USER_WALLET, userData.walletAddress)
+                            bundle.putString(IntentKey.KEY_USER_EMAIL, userData.email)
+                            bundle.putString(IntentKey.KEY_USER_IMAGE_URL, userData.profileImageUrl)
+                            bundle.putString(IntentKey.KEY_BALANCE, userData.balance.toString())
+                            bundle.putString(IntentKey.KEY_CURRENCY, userData.currency)
+                            findNavController().navigate( R.id.action_login_fragment_to_send_fund_fragment, bundle)
+                        }else{
+                            showShortToast(userData.errorMessage)
+                        }
                     }
                 }
             }
