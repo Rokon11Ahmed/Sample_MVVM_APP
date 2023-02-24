@@ -12,9 +12,9 @@ fun Activity.hideKeyboard() {
     }
 }
 
-fun Activity.showShortToast(message: String?){
+fun Activity.showShortToast(message: String?) {
     this.apply {
-        if (!message.isNullOrEmpty()){
+        if (!message.isNullOrEmpty()) {
             Toast.makeText(this.applicationContext, message, Toast.LENGTH_SHORT).show()
         }
     }

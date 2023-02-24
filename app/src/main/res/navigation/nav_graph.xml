@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/send_fund_fragment"
-        android:name="com.example.wind.ui.send_fund.SendFundFragment"
+        android:name="com.example.wind.ui.sendFund.SendFundFragment"
         tools:layout="@layout/fragment_send_fund" />
 
 </navigation>
