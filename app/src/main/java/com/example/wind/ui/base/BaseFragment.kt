@@ -7,13 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.wind.ui.MainActivity
 import java.lang.ref.WeakReference
 
-abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFactory: (LayoutInflater) -> VBinding) :
+abstract class BaseFragment<VBinding : ViewDataBinding>(
+    private val bindingFactory: (LayoutInflater) -> VBinding
+) :
     Fragment(), View.OnClickListener {
 
     protected val binding: VBinding by lazy { bindingFactory(layoutInflater) }
@@ -23,7 +24,7 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is MainActivity){
+        if (context is MainActivity) {
             activity = WeakReference(context)
         }
     }
@@ -66,7 +67,6 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
     }
 
     override fun onClick(view: View?) {
-
     }
 
     open fun showKeyboard() {
@@ -92,18 +92,18 @@ abstract class BaseFragment<VBinding : ViewDataBinding>(private val bindingFacto
         var previousSpecialChar: Char = Char.MIN_VALUE
         var isConsecutiveSpecialChar = false
         name.forEach {
-            if (it == '.' || it == '_'){
-                if (it == previousSpecialChar){
+            if (it == '.' || it == '_') {
+                if (it == previousSpecialChar) {
                     isConsecutiveSpecialChar = true
-                }else{
+                } else {
                     previousSpecialChar = it
                 }
-            }else{
+            } else {
                 charCount++
                 previousSpecialChar = Char.MIN_VALUE
             }
         }
-        if (name.length>33 || charCount<3 || isConsecutiveSpecialChar){
+        if (name.length > 33 || charCount < 3 || isConsecutiveSpecialChar) {
             return false
         }
         return true

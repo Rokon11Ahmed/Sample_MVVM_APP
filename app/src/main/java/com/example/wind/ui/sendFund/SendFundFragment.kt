@@ -1,4 +1,4 @@
-package com.example.wind.ui.send_fund
+package com.example.wind.ui.sendFund
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,11 +11,11 @@ import com.example.wind.utils.IntentKey
 import com.example.wind.utils.hideKeyboard
 import com.example.wind.utils.loadCircularImage
 
-class SendFundFragment : BaseFragment<FragmentSendFundBinding>(FragmentSendFundBinding::inflate),
+class SendFundFragment :
+    BaseFragment<FragmentSendFundBinding>(FragmentSendFundBinding::inflate),
     TextWatcher {
 
-
-    //private val viewModel: SendFundViewModel by viewModels()
+    // private val viewModel: SendFundViewModel by viewModels()
     private var userId: String = ""
     private var userName: String = ""
     private var userWallet: String = ""
@@ -85,15 +85,13 @@ class SendFundFragment : BaseFragment<FragmentSendFundBinding>(FragmentSendFundB
         count: Int,
         after: Int
     ) {
-
     }
 
     override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
-
     }
 
     override fun afterTextChanged(editable: Editable?) {
-        if (editable.toString().isNotEmpty()){
+        if (editable.toString().isNotEmpty()) {
             processAmountInput(editable.toString())
         }
     }
@@ -105,6 +103,4 @@ class SendFundFragment : BaseFragment<FragmentSendFundBinding>(FragmentSendFundB
             isShowAddFund(false)
         }
     }
-
-
 }

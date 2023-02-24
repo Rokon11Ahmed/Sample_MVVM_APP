@@ -1,4 +1,4 @@
-package com.example.wind.ui.send_fund
+package com.example.wind.ui.sendFund
 
 import androidx.lifecycle.ViewModel
 

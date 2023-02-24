@@ -2,8 +2,6 @@ package com.example.wind.ui.login
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
-import android.text.Spanned
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -25,7 +23,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate), OnOtpCompletionListener, TextWatcher {
+class LoginFragment :
+    BaseFragment<FragmentLoginBinding>(
+        FragmentLoginBinding::inflate
+    ),
+    OnOtpCompletionListener,
+    TextWatcher {
 
     private val viewModel: LoginViewModel by viewModels()
     var userPin = ""
@@ -39,7 +42,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         startObserver()
     }
 
-    private fun initViews(){
+    private fun initViews() {
         binding.apply {
             isContinueButtonEnable(isEnable = false)
             setClickListeners(continueButton)
@@ -47,7 +50,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             isOtpEnable(false)
             userNameEditText.addTextChangedListener(this@LoginFragment)
         }
-
     }
 
     override fun onClick(view: View?) {
@@ -58,7 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 R.id.continue_button -> {
                     getActivity()?.hideKeyboard()
                     val userName = binding.userNameEditText.text?.trim().toString()
-                    if (isUserNameValid(userName)){
+                    if (isUserNameValid(userName)) {
                         viewModel.login(userName, userPin)
                     }
                 }
@@ -77,7 +79,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     }
                     it.data?.let {
                         val userData = it as UserInfo
-                        if (userData.errorMessage.isNullOrBlank()){
+                        if (userData.errorMessage.isNullOrBlank()) {
                             val bundle = Bundle()
                             bundle.putString(IntentKey.KEY_USER_ID, userData.id)
                             bundle.putString(IntentKey.KEY_USER_NAME, userData.userName)
@@ -87,8 +89,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                             bundle.putString(IntentKey.KEY_BALANCE, userData.balance.toString())
                             bundle.putString(IntentKey.KEY_CURRENCY, userData.currency)
                             Log.d("TAG", "startObserver: LoginFragment")
-                            findNavController().navigate( R.id.action_login_fragment_to_send_fund_fragment, bundle)
-                        }else{
+                            findNavController().navigate(
+                                R.id.action_login_fragment_to_send_fund_fragment,
+                                bundle
+                            )
+                        } else {
                             getActivity()?.showShortToast(userData.errorMessage)
                         }
                     }
@@ -97,7 +102,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun isShowProgressBar(isShow: Boolean){
+    private fun isShowProgressBar(isShow: Boolean) {
         binding.progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
@@ -107,36 +112,44 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         isContinueButtonEnable(isEnable = true)
     }
 
-    override fun beforeTextChanged(chatSequence: CharSequence?, start: Int, count: Int, after: Int) {
-
+    override fun beforeTextChanged(
+        chatSequence: CharSequence?,
+        start: Int,
+        count: Int,
+        after: Int
+    ) {
     }
 
     override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
-
     }
 
     override fun afterTextChanged(editable: Editable?) {
         isOtpEnable(isUserNameValid(editable.toString()))
     }
 
-    private fun isOtpEnable(isEnable: Boolean){
-        if (isEnable){
+    private fun isOtpEnable(isEnable: Boolean) {
+        if (isEnable) {
             binding.otpView.isEnabled = true
             binding.otpView.alpha = 1f
-        }else{
+        } else {
             binding.otpView.isEnabled = false
             binding.otpView.alpha = 0.7f
         }
     }
 
-    private fun isContinueButtonEnable(isEnable: Boolean){
-        if (isEnable){
+    private fun isContinueButtonEnable(isEnable: Boolean) {
+        if (isEnable) {
             binding.continueButton.isEnabled = true
-            binding.continueButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_button_active_bg)
-        }else{
+            binding.continueButton.background = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.ic_button_active_bg
+            )
+        } else {
             binding.continueButton.isEnabled = false
-            binding.continueButton.background = ContextCompat.getDrawable(requireContext(), R.drawable.ic_button_inactive_bg)
+            binding.continueButton.background = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.ic_button_inactive_bg
+            )
         }
     }
-
 }
