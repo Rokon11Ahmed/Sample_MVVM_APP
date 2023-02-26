@@ -5,6 +5,7 @@ import com.example.data.api.LoginApi
 import com.example.data.repository.LoginRepositoryImpl
 import com.example.domain.common.Constants.BASE_URL
 import com.example.domain.repository.LoginRepository
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +41,7 @@ object DataModule {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
             .create(LoginApi::class.java)
     }

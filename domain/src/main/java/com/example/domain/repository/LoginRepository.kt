@@ -1,7 +1,9 @@
 package com.example.domain.repository
 
+import com.example.domain.common.Resource
 import com.example.domain.model.UserInfo
+import kotlinx.coroutines.flow.Flow
 
 interface LoginRepository {
-    suspend fun getLoginResponse(name: String, pin: String): UserInfo
+    fun getLoginResponse(name: String, pin: String): Flow<Resource<UserInfo>>
 }

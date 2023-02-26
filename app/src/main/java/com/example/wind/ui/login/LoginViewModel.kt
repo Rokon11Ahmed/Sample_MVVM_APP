@@ -6,11 +6,8 @@ import com.example.domain.common.Resource
 import com.example.domain.login.GetLoginUseCase
 import com.example.wind.ui.model.ApiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
@@ -21,21 +18,24 @@ class LoginViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     fun login(name: String, pin: String) {
-        getLoginUseCase(userName = name, pin = pin).onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _state.value = ApiState(data = result.data)
-                }
-                is Resource.Error -> {
-                    _state.value = ApiState(
-                        error = result.message ?: "An unexpected error occurred!"
-                    )
-                }
-                is Resource.Loading -> {
-                    _state.value = ApiState(isLoading = true)
+        getLoginUseCase(userName = name, pin = pin)
+            .onEach { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _state.value = ApiState(data = result.data)
+                    }
+                    is Resource.Error -> {
+                        _state.value = ApiState(
+                            error = result.message ?: "An unexpected error occurred!"
+                        )
+                    }
+                    is Resource.Loading -> {
+                        _state.value = ApiState(isLoading = true)
+                    }
                 }
             }
-        }.launchIn(viewModelScope)
+            .catch { println(it) }
+            .launchIn(viewModelScope)
     }
 
     override fun onCleared() {
